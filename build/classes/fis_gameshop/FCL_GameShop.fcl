@@ -1,0 +1,94 @@
+FUNCTION_BLOCK recomendacion	// Definición de bloque
+
+// El único tipo de variable soportada es REAL
+
+// Definición de las variables de entrada
+VAR_INPUT				
+        precio : REAL; RANGE := (0 .. 100);
+        calificacion : REAL; RANGE := (0 .. 10);
+        duracion : REAL; RANGE := (0 .. 6);
+END_VAR
+
+// Definición de las variables de salida
+VAR_OUTPUT				
+        puntajeRecomendacion : REAL; RANGE := (0 .. 100);
+        calidadPrecio : REAL; RANGE := (0 .. 100);
+END_VAR
+
+// Fuzzificación de la variable de entrada 'precio'
+FUZZIFY precio
+        TERM bajo := trape 0 0 15 30; 
+        TERM moderado := trian 20 35 50;
+        TERM alto := trian 40 65 90;
+        TERM muyAlto := trape 70 85 100 100;
+END_FUZZIFY
+
+// Fuzzificación de la variable de entrada 'calificacion'
+FUZZIFY calificacion
+        TERM bajo := trape 0 0 2 4;
+        TERM medio := trian 3 5 7;
+        TERM alto := trian 6 7.5 9;
+        TERM excelente := trape 8 9 10 10;
+END_FUZZIFY
+
+// Fuzzificación de la variable de entrada 'duracion'
+FUZZIFY duracion
+        TERM corto := trape 0 0 0.5 1;
+        TERM moderado := trian 0.5 1.2 2;
+        TERM largo := trian 1.5 2.7 4;
+        TERM muyLargo := trape 3 4.5 6 6;
+END_FUZZIFY
+
+
+// Defuzzificación de la variable de salida 'puntajeRecomendacion'
+DEFUZZIFY puntajeRecomendacion
+        TERM bajo := trape 0 0 15 30;
+        TERM medio := trian 20 40 60;
+        TERM alto := trian 50 65 80;
+        TERM muyAlto := trape 70 85 100 100;
+
+        METHOD : COG;		// Usa el metodo de 'Centro de Gravedad'
+        DEFAULT := 0;		// Valor por defecto si ninguna regla activa el defuzzificador
+END_DEFUZZIFY
+
+// Defuzzificación de la variable de salida 'calidadPrecio'
+DEFUZZIFY calidadPrecio
+        TERM baja := trape 0 0 15 35;
+        TERM media := trian 25 45 65;
+        TERM alta := trian 55 68 80;
+        TERM muyAlta := trape 68 85 100 100;
+
+        METHOD : COG;		// Usa el metodo de 'Centro de Gravedad'
+        DEFAULT := 0;		// Valor por defecto si ninguna regla activa el defuzzificador
+END_DEFUZZIFY
+
+// Reglas de inferencia
+RULEBLOCK No1
+        AND : MIN;	// Usa el 'mín' para el 'AND' y por defecto el 'máx' para el 'OR' (operador difuso).
+        ACT : MIN;	// Usa el metodo 'min' para la activación/implicación (trunca)
+        ACCU : MAX;	// Usa el 'max' para la acumulación/agregación
+
+
+RULE 1 : IF precio IS muyAlto AND calificacion IS bajo AND duracion IS corto THEN puntajeRecomendacion IS bajo, calidadPrecio IS baja;
+RULE 2 : IF precio IS moderado AND calificacion IS medio AND duracion IS moderado THEN puntajeRecomendacion IS medio,calidadPrecio IS media; 
+RULE 3 : IF precio IS bajo OR calificacion IS alto OR duracion IS largo THEN puntajeRecomendacion IS medio,calidadPrecio IS alta;
+RULE 4 : IF precio IS alto AND calificacion IS excelente AND duracion IS moderado THEN puntajeRecomendacion IS alto,calidadPrecio IS media;
+RULE 5 : IF precio IS bajo AND calificacion IS excelente AND duracion IS largo THEN puntajeRecomendacion IS muyAlto,calidadPrecio IS muyAlta;
+RULE 6 : IF precio IS bajo THEN puntajeRecomendacion IS medio;
+RULE 7 : IF precio IS bajo AND calificacion IS bajo AND duracion IS corto THEN puntajeRecomendacion IS bajo,calidadPrecio IS baja;
+RULE 8 : IF precio IS muyAlto AND calificacion IS excelente AND duracion IS muyLargo THEN puntajeRecomendacion IS medio,calidadPrecio IS media;
+RULE 9 : IF calificacion IS excelente THEN puntajeRecomendacion IS medio;
+RULE 10 : IF precio IS moderado AND calificacion IS excelente AND duracion IS muyLargo THEN puntajeRecomendacion IS muyAlto,calidadPrecio IS muyAlta;
+RULE 11 : IF precio IS alto AND calificacion IS bajo AND duracion IS corto THEN puntajeRecomendacion IS bajo,calidadPrecio IS baja;
+RULE 12 : IF precio IS alto AND calificacion IS alto AND duracion IS muyLargo THEN puntajeRecomendacion IS alto,calidadPrecio IS media;
+RULE 13 : IF precio IS moderado AND calificacion IS bajo AND duracion IS muyLargo THEN puntajeRecomendacion IS bajo,calidadPrecio IS baja;
+RULE 14 : IF precio IS moderado AND calificacion IS alto AND duracion IS muyLargo THEN puntajeRecomendacion IS alto,calidadPrecio IS alta;
+RULE 15 : IF precio IS muyAlto AND calificacion IS medio AND duracion IS moderado THEN puntajeRecomendacion IS medio,calidadPrecio IS baja;
+RULE 16 : IF precio IS bajo AND calificacion IS excelente AND duracion IS muyLargo THEN puntajeRecomendacion IS muyAlto,calidadPrecio IS muyAlta;
+RULE 17 : IF precio IS muyAlto AND calificacion IS medio AND duracion IS muyLargo THEN puntajeRecomendacion IS medio,calidadPrecio IS media;
+RULE 18 : IF precio IS moderado OR calificacion IS alto OR duracion IS largo THEN puntajeRecomendacion IS alto,calidadPrecio IS alta;
+RULE 19 : IF precio IS muyAlto OR calificacion IS medio OR duracion IS muyLargo THEN puntajeRecomendacion IS medio,calidadPrecio IS media;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
