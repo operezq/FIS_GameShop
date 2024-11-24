@@ -41,7 +41,6 @@ public class GameShopUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         precioTextField = new javax.swing.JTextField();
         duracionTextField = new javax.swing.JTextField();
-        calificacionComboBox = new javax.swing.JComboBox<>();
         calcularButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultadosRecomendacionTextArea = new javax.swing.JTextArea();
@@ -53,6 +52,8 @@ public class GameShopUI extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        calificacionTextField = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -89,11 +90,11 @@ public class GameShopUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Precio [0 - 100]");
+        jLabel1.setText("Precio [0 - 100] [$]");
 
-        jLabel2.setText("Duracion [0 - 6]");
+        jLabel2.setText("Duracion [0 - 6] [horas]");
 
-        jLabel3.setText("Calificacion [0 - 10]");
+        jLabel3.setText("Calificacion [0 - 10] [puntos]");
 
         precioTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,8 +112,6 @@ public class GameShopUI extends javax.swing.JFrame {
                 duracionTextFieldKeyTyped(evt);
             }
         });
-
-        calificacionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
         calcularButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         calcularButton.setText("Calcular");
@@ -144,37 +143,23 @@ public class GameShopUI extends javax.swing.JFrame {
 
         jLabel11.setText(" si cierto videojuego es el adecuado para ellos de acuerdo a determinadas preferencias y necesidades.");
 
+        calificacionTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calificacionTextFieldActionPerformed(evt);
+            }
+        });
+        calificacionTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                calificacionTextFieldKeyTyped(evt);
+            }
+        });
+
+        jLabel12.setText("Se aceptan decimales. Puede utilizar el punto ( . ) o la coma ( , )");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(266, 266, 266)
-                        .addComponent(calcularButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(calificacionComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(precioTextField)
-                            .addComponent(duracionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -190,6 +175,34 @@ public class GameShopUI extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addGap(167, 167, 167))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(precioTextField)
+                            .addComponent(duracionTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                            .addComponent(calificacionTextField))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel12)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(290, 290, 290)
+                        .addComponent(calcularButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,19 +227,21 @@ public class GameShopUI extends javax.swing.JFrame {
                     .addComponent(precioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(calificacionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(calificacionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(duracionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addGap(46, 46, 46)
+                .addGap(33, 33, 33)
                 .addComponent(calcularButton)
-                .addGap(50, 50, 50)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -252,8 +267,8 @@ public class GameShopUI extends javax.swing.JFrame {
         try{
             double precio = Double.parseDouble(precioTextField.getText().replace(",","."));
         
-            int calificacion = Integer.parseInt((String) calificacionComboBox.getSelectedItem());
-        
+            
+            double calif = Double.parseDouble(calificacionTextField.getText());
             double duracion = Double.parseDouble(duracionTextField.getText());
         
             if(precio > 100 || precio < 0){
@@ -269,9 +284,16 @@ public class GameShopUI extends javax.swing.JFrame {
                 resultadosRecomendacionTextArea.setText("");
                 return;
             }
+            
+            if (calif > 10 || calif < 0){
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(rootPane,"Calificación inválida. Debe estar en un rango de 0 a 10");
+                resultadosRecomendacionTextArea.setText("");
+                return;
+            }
 
 
-            resultadosRecomendacionTextArea.setText(resultados.calcularPuntajeRecomendacion(precio, calificacion, duracion));
+            resultadosRecomendacionTextArea.setText(resultados.calcularPuntajeRecomendacion(precio, calif, duracion));
 
         }catch (NumberFormatException ex) {
         // Manejo de excepciones por formato inválido
@@ -303,6 +325,19 @@ public class GameShopUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,"Valor invalido. Ingrese solo numeros");
         }        // TODO add your handling code here:
     }//GEN-LAST:event_duracionTextFieldKeyTyped
+
+    private void calificacionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calificacionTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_calificacionTextFieldActionPerformed
+
+    private void calificacionTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calificacionTextFieldKeyTyped
+        char validar = evt.getKeyChar();
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();            
+            JOptionPane.showMessageDialog(rootPane,"Valor invalido. Ingrese solo numeros");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_calificacionTextFieldKeyTyped
 
     /**
      * @param args the command line arguments
@@ -341,7 +376,7 @@ public class GameShopUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton calcularButton;
-    private javax.swing.JComboBox<String> calificacionComboBox;
+    private javax.swing.JTextField calificacionTextField;
     private javax.swing.JTextField duracionTextField;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
@@ -349,6 +384,7 @@ public class GameShopUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

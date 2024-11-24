@@ -12,7 +12,7 @@ public class FIS_GameShop {
     }
     
     
-    public String calcularPuntajeRecomendacion(double precio, int calificacion, double duracion){
+    public String calcularPuntajeRecomendacion(double precio, double calificacion, double duracion){
         String fileName = "src/fis_gameshop/FCL_GameShop.fcl";
         
         FIS fis = FIS.load(fileName,true);
